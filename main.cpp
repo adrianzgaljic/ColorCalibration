@@ -301,25 +301,25 @@ void colorCalibrateImage(Mat src, double calibrationMatrix[3][3]){
 int main() {
 
 
-    Mat src = imread("dark_image.jpg", 1);
+    Mat src = imread("processed_image.jpg", 1);
     //cvtColor(src, src, COLOR_BGR2RGB);
 
     Mat b1_orig = imread("b1_original.jpg", 1);
     //cvtColor(b1_orig, b1_orig, COLOR_BGR2RGB);
 
-    Mat b1_dark = imread("b1_dark.jpg", 1);
+    Mat b1_dark = imread("b1_p.jpg", 1);
     //cvtColor(b1_dark, b1_dark, COLOR_BGR2RGB);
 
     Mat b2_orig = imread("b2_original.jpg", 1);
     //cvtColor(b2_orig, b2_orig, COLOR_BGR2RGB);
 
-    Mat b2_dark = imread("b2_dark.jpg", 1);
+    Mat b2_dark = imread("b2_p.jpg", 1);
     //cvtColor(b2_dark, b2_dark, COLOR_BGR2RGB);
 
     Mat b3_orig = imread("b3_original.jpg", 1);
     //cvtColor(b3_orig, b3_orig, COLOR_BGR2RGB);
 
-    Mat b3_dark = imread("b3_dark.jpg", 1);
+    Mat b3_dark = imread("b3_p.jpg", 1);
     //cvtColor(b3_dark, b3_dark, COLOR_BGR2RGB);
 
     double b1_origValue[3];
@@ -353,9 +353,20 @@ int main() {
         }
         cout << "\n";
     }
+
+/*
+    Mat src = imread("processed_image.jpg", 1);
+
+    double result[3][3] = {
+            {0.674767,0.0149959,0.201285},
+            {-0.0562391,0.87316,0.029343},
+            {-0.0910815,0.0665288,0.767902}
+    };
+    */
+
     //cvtColor(src, src, COLOR_BGR2RGB);
 
-    imshow("dark image", src);
+    imshow("before calibration", src);
 
     colorCalibrateImage(src, result);
     //cvtColor(src, src, COLOR_BGR2RGB);
@@ -364,7 +375,7 @@ int main() {
     Mat light = imread("original.jpg", 1);
     //cvtColor(light, light, COLOR_BGR2RGB);
     imshow("original image", light);
-
+    imwrite("calibrated_whole.jpg", src);
     waitKey(0);
 
 
