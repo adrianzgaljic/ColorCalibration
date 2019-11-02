@@ -37,6 +37,21 @@ Mapping parameters for each channel can be computed separately, having 3 unknown
 
 <img src="https://github.com/adrianzgaljic/ColorCalibration/blob/master/cmake-build-debug/example.png" alt="drawing" width="400"/>
 
+## Next steps
+
+### Using color chart with more than 3 colors
+
+With more than 3 colors, we would have a linear system with the number of equations more than the number of variables.
+This can be solved with some kind of regression algorithm. Least squares, polynomial regression, neural network?
+It is also important to choose colors that give best result with color scales used in test strips.
+
+### Using other color spaces
+
+Using color spaces other than RGB, like YUV or HSV, could produce better results?
+
+
+
+
 
             
           
