@@ -30,9 +30,12 @@ Mapping parameters for each channel can be computed separately, having 3 unknown
 
 ## Example
 
-Original and altered image
 
-<img src="https://github.com/adrianzgaljic/ColorCalibration/blob/master/cmake-build-debug/original.jpg" alt="drawing" width="200"/>   <img src="https://github.com/adrianzgaljic/ColorCalibration/blob/master/cmake-build-debug/processed_image.jpg" alt="drawing" width="200"/>  <img src="https://github.com/adrianzgaljic/ColorCalibration/blob/master/cmake-build-debug/examplee.png" alt="drawing" width="200"/>
+<p>Original, altered and calibrated image</p>
+
+<img src="https://github.com/adrianzgaljic/ColorCalibration/blob/master/cmake-build-debug/original.jpg" alt="drawing" width="200"/>   <img src="https://github.com/adrianzgaljic/ColorCalibration/blob/master/cmake-build-debug/processed_image.jpg" alt="drawing" width="200"/>  <img src="https://github.com/adrianzgaljic/ColorCalibration/blob/master/cmake-build-debug/calibrated.jpg" alt="drawing" width="200"/>
+
+<img src="https://github.com/adrianzgaljic/ColorCalibration/blob/master/cmake-build-debug/example.png" alt="drawing" width="400"/>
 
 
             
