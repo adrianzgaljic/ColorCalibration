@@ -301,7 +301,7 @@ void colorCalibrateImage(Mat src, double calibrationMatrix[3][3]){
 int main() {
 
 
-    Mat src = imread("processed_image.jpg", 1);
+    Mat src = imread("b3_p.jpg", 1);
     //cvtColor(src, src, COLOR_BGR2RGB);
 
     Mat b1_orig = imread("b1_original.jpg", 1);
@@ -375,7 +375,7 @@ int main() {
     Mat light = imread("original.jpg", 1);
     //cvtColor(light, light, COLOR_BGR2RGB);
     imshow("original image", light);
-    imwrite("calibrated_whole.jpg", src);
+    imwrite("b3_p_calib.jpg", src);
     waitKey(0);
 
 
