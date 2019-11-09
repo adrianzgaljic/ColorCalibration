@@ -9,6 +9,8 @@
 using namespace cv;
 using namespace std;
 
+TransformationFinder tf;
+
 
 void balance_white(cv::Mat mat) {
     Mat hsv;
@@ -18,7 +20,7 @@ void balance_white(cv::Mat mat) {
     Mat newmat = Mat::zeros(Size(mat.cols, mat.rows), CV_8UC3);
 
     cvtColor(mat , hsv, COLOR_RGB2HSV);
-    imshow("Img", mat);
+    //imshow("Img", mat);
     //waitKey(0);
 
     for (int y = 0; y < mat.rows; ++y) {
@@ -297,14 +299,13 @@ void colorCalibrateImage(Mat src, double calibrationMatrix[3][3]){
             ptr[x * 3 + 2] = static_cast<uchar>(newValues[2]); //blue
         }
     }
-    imshow("calibrated image", src);
+    //imshow("calibrated image", src);
 
 }
 
-void colorCalibrateImage2(Mat src, double** calibrationMatrix){
+Mat colorCalibrateImage2(Mat original, double** calibrationMatrix){
 
-    TransformationFinder tf;
-
+    Mat src = original.clone();
     for (int y = 0; y < src.rows; ++y) {
         uchar *ptr = src.ptr<uchar>(y);
         for (int x = 0; x < src.cols; ++x) {
@@ -330,7 +331,8 @@ void colorCalibrateImage2(Mat src, double** calibrationMatrix){
             ptr[x * 3 + 2] = static_cast<uchar>(newValues[2]); //blue
         }
     }
-    imshow("calibrated image 2", src);
+
+    return src;
 
 
 }
@@ -361,40 +363,53 @@ int main() {
     Mat b3_dark = imread("b3_p.jpg", 1);
     //cvtColor(b3_dark, b3_dark, COLOR_BGR2RGB);
 
+    Mat b4_orig = imread("b4_original.jpg", 1);
+    //cvtColor(b3_orig, b3_orig, COLOR_BGR2RGB);
+
+    Mat b4_dark = imread("b4_p.jpg", 1);
+    //cvtColor(b3_dark, b3_dark, COLOR_BGR2RGB);
+
     double b1_origValue[3];
     getAverageValues(b1_orig, b1_origValue);
     double b2_origValue[3];
     getAverageValues(b2_orig, b2_origValue);
     double b3_origValue[3];
     getAverageValues(b3_orig, b3_origValue);
+    double b4_origValue[3];
+    getAverageValues(b4_orig, b4_origValue);
     double b1_darkValue[3];
     getAverageValues(b1_dark, b1_darkValue);
     double b2_darkValue[3];
     getAverageValues(b2_dark, b2_darkValue);
     double b3_darkValue[3];
     getAverageValues(b3_dark, b3_darkValue);
+    double b4_darkValue[3];
+    getAverageValues(b4_dark, b4_darkValue);
 
     double result[3][3];
-    double measuredColors[3][3] = {
+    double measuredColors[][3] = {
             {b1_darkValue[0], b1_darkValue[1], b1_darkValue[2]},
             {b2_darkValue[0], b2_darkValue[1], b2_darkValue[2]},
-            {b3_darkValue[0], b3_darkValue[1], b3_darkValue[2]}
+            {b3_darkValue[0], b3_darkValue[1], b3_darkValue[2]},
+            {b4_darkValue[0], b4_darkValue[1], b4_darkValue[2]}
     };
-    double trueColors[3][3] = {
+    double trueColors[][3] = {
             {b1_origValue[0], b1_origValue[1], b1_origValue[2]},
             {b2_origValue[0], b2_origValue[1], b2_origValue[2]},
-            {b3_origValue[0], b3_origValue[1], b3_origValue[2]}
+            {b3_origValue[0], b3_origValue[1], b3_origValue[2]},
+            {b4_origValue[0], b4_origValue[1], b4_origValue[2]}
+
     };
-    getCalibrationMatrix(trueColors, measuredColors, result);
+ /*   getCalibrationMatrix(trueColors, measuredColors, result);
     for (int i=0; i<3; i++){
         for (int j=0; j<3; j++){
             cout << result[j][i] << ",";
         }
         cout << "\n";
     }
-
-    TransformationFinder tf;
-    double** transformation = tf.findTransformation(measuredColors, trueColors, 3);
+*/
+    int noOfRows = sizeof(trueColors)/sizeof(double)/3;
+    double** transformation = tf.findTransformation(measuredColors, trueColors, noOfRows);
     for (int i=0; i<3; i++){
         for (int j=0; j<3; j++){
             cout << transformation[i][j] << ",";
@@ -402,7 +417,36 @@ int main() {
         cout << "\n";
     }
 
+
+
     colorCalibrateImage2(src2, transformation);
+    //imshow("calibrated image 2", src2);
+
+    Mat newB1 = colorCalibrateImage2(b1_dark, transformation);
+    Mat newB2 = colorCalibrateImage2(b2_dark, transformation);
+    Mat newB3 = colorCalibrateImage2(b3_dark, transformation);
+    Mat newB4 = colorCalibrateImage2(b4_dark, transformation);
+
+    double* b1NewValue = new double[3];
+    getAverageValues(newB1, b1NewValue);
+    double* b2NewValue = new double[3];
+    getAverageValues(newB2, b2NewValue);
+    double* b3NewValue = new double[3];
+    getAverageValues(newB3, b3NewValue);
+    double* b4NewValue = new double[3];
+    getAverageValues(newB4, b4NewValue);
+    double newValues[4][3] = {{b1NewValue[0], b1NewValue[1], b1NewValue[2]},
+                              {b2NewValue[0], b2NewValue[1], b2NewValue[2]},
+                              {b3NewValue[0], b3NewValue[1], b3NewValue[2]},
+                              {b4NewValue[0], b4NewValue[1], b4NewValue[2]}};
+    cout << "error: " << tf.getError(trueColors, newValues, noOfRows) << endl;
+
+
+    imshow("new b1", newB1);
+    imshow("dark b1", b1_dark);
+    imshow("original b1", b1_orig);
+
+
 
     cout << b1_darkValue[0] << endl;
     cout << b1_darkValue[1] << endl;
@@ -413,6 +457,9 @@ int main() {
     cout << b3_darkValue[0] << endl;
     cout << b3_darkValue[1] << endl;
     cout << b3_darkValue[2] << endl;
+    cout << b4_darkValue[0] << endl;
+    cout << b4_darkValue[1] << endl;
+    cout << b4_darkValue[2] << endl;
 
     cout << "---" << endl;
     cout << b1_origValue[0] << endl;
@@ -424,6 +471,10 @@ int main() {
     cout << b3_origValue[0] << endl;
     cout << b3_origValue[1] << endl;
     cout << b3_origValue[2] << endl;
+    cout << b4_origValue[0] << endl;
+    cout << b4_origValue[1] << endl;
+    cout << b4_origValue[2] << endl;
+
 
 
 /*
@@ -438,16 +489,16 @@ int main() {
 
     //cvtColor(src, src, COLOR_BGR2RGB);
 
-    imshow("before calibration", src);
+    //imshow("before calibration", src);
 
-    colorCalibrateImage(src, result);
+    //colorCalibrateImage(src, result);
     //cvtColor(src, src, COLOR_BGR2RGB);
 
     //imshow("calibrated image", src);
     Mat light = imread("original.jpg", 1);
     //cvtColor(light, light, COLOR_BGR2RGB);
-    imshow("original image", light);
-    imwrite("calibrated.jpg", src);
+    //imshow("original image", light);
+    //imwrite("calibrated.jpg", src);
     waitKey(0);
 
 

@@ -11,6 +11,8 @@ TransformationFinder.h
 /Users/adrianzgaljic/ColorCalibration/TransformationFinder.h
 
 /Users/adrianzgaljic/ColorCalibration/TransformationFinder.h
+math.h
+-
 
 /Users/adrianzgaljic/ColorCalibration/main.cpp
 opencv2/imgcodecs.hpp

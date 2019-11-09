@@ -111,3 +111,15 @@ double* TransformationFinder::transformColor(double color[3], double** transform
 double** TransformationFinder::findTransformation(double originalColor[][3], double trueColor[][3], int noOfColors) {
     return  getTransformationMatrix(originalColor, trueColor, noOfColors);
 }
+
+float TransformationFinder::getError(double originalColor[][3], double trueColor[][3], int rows) {
+    double error = 0;
+    for (int i=0; i<rows; i++){
+        error += pow(originalColor[i][0] - trueColor[i][0], 2) +
+                pow(originalColor[i][1] - trueColor[i][1], 2) +
+                pow(originalColor[i][2] - trueColor[i][2], 2);
+    }
+
+    return error/rows;
+}
+
