@@ -82,7 +82,7 @@
 				</MakeCommands>
 			</Target>
 		</Build>
-		<Unit filename="/Users/adrianzgaljic/ColorCalibration/main.cpp">
+		<Unit filename="/Users/adrianzgaljic/ColorCalibration/findMinimum.cpp">
 			<Option target="opencv"/>
 		</Unit>
 		<Unit filename="/Users/adrianzgaljic/ColorCalibration/CMakeLists.txt">

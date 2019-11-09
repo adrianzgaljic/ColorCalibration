@@ -1,5 +1,5 @@
 file(REMOVE_RECURSE
-  "CMakeFiles/opencv.dir/main.cpp.o"
+  "CMakeFiles/opencv.dir/findMinimum.cpp.o"
   "opencv.pdb"
   "opencv"
 )

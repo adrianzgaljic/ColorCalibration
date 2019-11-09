@@ -123,32 +123,32 @@ opencv/fast:
 	$(MAKE) -f CMakeFiles/opencv.dir/build.make CMakeFiles/opencv.dir/build
 .PHONY : opencv/fast
 
-main.o: main.cpp.o
+findMinimum.o: findMinimum.cpp.o
 
-.PHONY : main.o
+.PHONY : findMinimum.o
 
 # target to build an object file
-main.cpp.o:
-	$(MAKE) -f CMakeFiles/opencv.dir/build.make CMakeFiles/opencv.dir/main.cpp.o
-.PHONY : main.cpp.o
+findMinimum.cpp.o:
+	$(MAKE) -f CMakeFiles/opencv.dir/build.make CMakeFiles/opencv.dir/findMinimum.cpp.o
+.PHONY : findMinimum.cpp.o
 
-main.i: main.cpp.i
+findMinimum.i: findMinimum.cpp.i
 
-.PHONY : main.i
+.PHONY : findMinimum.i
 
 # target to preprocess a source file
-main.cpp.i:
-	$(MAKE) -f CMakeFiles/opencv.dir/build.make CMakeFiles/opencv.dir/main.cpp.i
-.PHONY : main.cpp.i
+findMinimum.cpp.i:
+	$(MAKE) -f CMakeFiles/opencv.dir/build.make CMakeFiles/opencv.dir/findMinimum.cpp.i
+.PHONY : findMinimum.cpp.i
 
-main.s: main.cpp.s
+findMinimum.s: findMinimum.cpp.s
 
-.PHONY : main.s
+.PHONY : findMinimum.s
 
 # target to generate assembly for a file
-main.cpp.s:
-	$(MAKE) -f CMakeFiles/opencv.dir/build.make CMakeFiles/opencv.dir/main.cpp.s
-.PHONY : main.cpp.s
+findMinimum.cpp.s:
+	$(MAKE) -f CMakeFiles/opencv.dir/build.make CMakeFiles/opencv.dir/findMinimum.cpp.s
+.PHONY : findMinimum.cpp.s
 
 # Help Target
 help:
@@ -159,9 +159,9 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... edit_cache"
 	@echo "... opencv"
-	@echo "... main.o"
-	@echo "... main.i"
-	@echo "... main.s"
+	@echo "... findMinimum.o"
+	@echo "... findMinimum.i"
+	@echo "... findMinimum.s"
 .PHONY : help
 
 

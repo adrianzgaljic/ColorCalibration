@@ -290,6 +290,7 @@ void colorCalibrateImage(Mat src, double calibrationMatrix[3][3]){
                 }
             }
 
+
             ptr[x * 3] = static_cast<uchar>(newValues[0]); //red
             ptr[x * 3 + 1] = static_cast<uchar>(newValues[1]); //green
             ptr[x * 3 + 2] = static_cast<uchar>(newValues[2]); //blue
@@ -353,6 +354,28 @@ int main() {
         }
         cout << "\n";
     }
+
+    cout << b1_darkValue[0] << endl;
+    cout << b1_darkValue[1] << endl;
+    cout << b1_darkValue[2] << endl;
+    cout << b2_darkValue[0] << endl;
+    cout << b2_darkValue[1] << endl;
+    cout << b2_darkValue[2] << endl;
+    cout << b3_darkValue[0] << endl;
+    cout << b3_darkValue[1] << endl;
+    cout << b3_darkValue[2] << endl;
+
+    cout << "---" << endl;
+    cout << b1_origValue[0] << endl;
+    cout << b1_origValue[1] << endl;
+    cout << b1_origValue[2] << endl;
+    cout << b2_origValue[0] << endl;
+    cout << b2_origValue[1] << endl;
+    cout << b2_origValue[2] << endl;
+    cout << b3_origValue[0] << endl;
+    cout << b3_origValue[1] << endl;
+    cout << b3_origValue[2] << endl;
+
 
 /*
     Mat src = imread("processed_image.jpg", 1);
