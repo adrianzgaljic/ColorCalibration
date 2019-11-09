@@ -11,21 +11,22 @@ using namespace std;
 TransformationFinder tf;
 
 void getAverageValues(Mat img, double values[3]){
-    double sumRed = 0;
-    double sumGreen = 0;
     double sumBlue = 0;
+    double sumGreen = 0;
+    double sumRed = 0;
     double noOfPixels = img.cols * img.rows;
     for (int y = 0; y < img.rows; ++y) {
-        uchar* ptr = img.ptr<uchar>(y);
+        uchar *ptr = img.ptr<uchar>(y);
         for (int x = 0; x < img.cols; ++x) {
-            sumRed += ptr[x * 3];
+            sumBlue += ptr[x * 3];
             sumGreen += ptr[x * 3 + 1];
-            sumBlue += ptr[x * 3 + 2];
+            sumRed += ptr[x * 3 + 2];
         }
     }
-    values[0] = sumRed/noOfPixels;
+
+    values[0] = sumBlue/noOfPixels;
     values[1] = sumGreen/noOfPixels;
-    values[2] = sumBlue/noOfPixels;
+    values[2] = sumRed/noOfPixels;
 }
 
 
@@ -83,19 +84,6 @@ int main() {
     Mat b4Orig = imread("b4_original.jpg", 1);
     Mat b4Dark = imread("b4_p.jpg", 1);
 
-
-    cvtColor(src, src, COLOR_BGR2HSV);
-    cvtColor(original, original, COLOR_BGR2HSV);
-    cvtColor(b1Orig, b1Orig, COLOR_BGR2HSV);
-    cvtColor(b2Orig, b2Orig, COLOR_BGR2HSV);
-    cvtColor(b3Orig, b3Orig, COLOR_BGR2HSV);
-    cvtColor(b4Orig, b4Orig, COLOR_BGR2HSV);
-    cvtColor(b1Dark, b1Dark, COLOR_BGR2HSV);
-    cvtColor(b2Dark, b2Dark, COLOR_BGR2HSV);
-    cvtColor(b3Dark, b3Dark, COLOR_BGR2HSV);
-    cvtColor(b4Dark, b4Dark, COLOR_BGR2HSV);
-
-
     double b1OrigValue[3];
     getAverageValues(b1Orig, b1OrigValue);
     double b2OrigValue[3];
@@ -139,9 +127,6 @@ int main() {
 
 
     Mat newImg = colorCalibrateImage(src, transformation);
-    cvtColor(src, src, COLOR_HSV2BGR);
-    cvtColor(newImg, newImg, COLOR_HSV2BGR);
-    cvtColor(original, original, COLOR_HSV2BGR);
 
     imshow("blue image", src);
     imshow("calibrated image", newImg);
@@ -165,6 +150,16 @@ int main() {
                               {b2NewValue[0], b2NewValue[1], b2NewValue[2]},
                               {b3NewValue[0], b3NewValue[1], b3NewValue[2]},
                               {b4NewValue[0], b4NewValue[1], b4NewValue[2]}};
+
+
+    cout << "--------" << endl;
+    for (int i=0; i<4; i++){
+        for (int j=0; j<3; j++){
+            cout << newValues[i][j] << ",";
+        }
+        cout << "\n";
+    }
+    cout << "--------" << endl;
     cout << "error: " << tf.getError(trueColors, newValues, noOfRows) << endl;
 
 
