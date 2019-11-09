@@ -17,12 +17,8 @@ math.h
 /Users/adrianzgaljic/ColorCalibration/main.cpp
 opencv2/imgcodecs.hpp
 -
-opencv2/videoio/videoio.hpp
--
 opencv2/highgui/highgui.hpp
 -
-opencv2/imgproc/imgproc.hpp
-/Users/adrianzgaljic/ColorCalibration/opencv2/imgproc/imgproc.hpp
 iostream
 -
 TransformationFinder.h
@@ -848,10 +844,6 @@ opencv2/core.hpp
 opencv2/core.hpp
 /usr/local/Cellar/opencv/4.1.1_2/include/opencv4/opencv2/opencv2/core.hpp
 
-/usr/local/Cellar/opencv/4.1.1_2/include/opencv4/opencv2/imgproc/imgproc.hpp
-opencv2/imgproc.hpp
-/usr/local/Cellar/opencv/4.1.1_2/include/opencv4/opencv2/imgproc/opencv2/imgproc.hpp
-
 /usr/local/Cellar/opencv/4.1.1_2/include/opencv4/opencv2/ml.hpp
 opencv2/core.hpp
 /usr/local/Cellar/opencv/4.1.1_2/include/opencv4/opencv2/opencv2/core.hpp
@@ -1111,10 +1103,6 @@ opencv2/imgproc.hpp
 /usr/local/Cellar/opencv/4.1.1_2/include/opencv4/opencv2/videoio.hpp
 opencv2/core.hpp
 /usr/local/Cellar/opencv/4.1.1_2/include/opencv4/opencv2/opencv2/core.hpp
-
-/usr/local/Cellar/opencv/4.1.1_2/include/opencv4/opencv2/videoio/videoio.hpp
-opencv2/videoio.hpp
-/usr/local/Cellar/opencv/4.1.1_2/include/opencv4/opencv2/videoio/opencv2/videoio.hpp
 
 /usr/local/Cellar/opencv/4.1.1_2/include/opencv4/opencv2/videostab.hpp
 opencv2/videostab/stabilizer.hpp
