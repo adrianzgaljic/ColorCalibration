@@ -37,7 +37,18 @@ Mapping parameters for each channel can be computed separately, having 3 unknown
 
 <img src="https://github.com/adrianzgaljic/ColorCalibration/blob/master/cmake-build-debug/example.png" alt="drawing" width="400"/>
 
+
 ## Next steps
+
+### Using a neural network 
+
+Neural netwrok seems to produce fair results but is unacceptably slow because it needs to be trained in real time.
+Project can be found here: https://github.com/adrianzgaljic/ColorCalibratorNN
+Here are results using 3, 4 and 5 colors:
+
+
+<img src="https://github.com/adrianzgaljic/ColorCalibration/blob/master/cmake-build-debug/image_fixed_3_colors.jpg" alt="drawing" width="200"/>   <img src="https://github.com/adrianzgaljic/ColorCalibration/blob/master/cmake-build-debug/image_fixed_4_colors.jpg" alt="drawing" width="200"/>  <img src="https://github.com/adrianzgaljic/ColorCalibration/blob/master/cmake-build-debug/image_fixed_5_colors.jpg" alt="drawing" width="200"/>
+
 
 ### Using color chart with more than 3 colors
 
