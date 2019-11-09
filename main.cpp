@@ -2,6 +2,7 @@
 #include <opencv2/highgui/highgui.hpp>
 #include <iostream>
 #include "TransformationFinder.h"
+#include "opencv2/imgproc/imgproc.hpp"
 
 
 using namespace cv;
@@ -82,6 +83,19 @@ int main() {
     Mat b4Orig = imread("b4_original.jpg", 1);
     Mat b4Dark = imread("b4_p.jpg", 1);
 
+
+    cvtColor(src, src, COLOR_BGR2HSV);
+    cvtColor(original, original, COLOR_BGR2HSV);
+    cvtColor(b1Orig, b1Orig, COLOR_BGR2HSV);
+    cvtColor(b2Orig, b2Orig, COLOR_BGR2HSV);
+    cvtColor(b3Orig, b3Orig, COLOR_BGR2HSV);
+    cvtColor(b4Orig, b4Orig, COLOR_BGR2HSV);
+    cvtColor(b1Dark, b1Dark, COLOR_BGR2HSV);
+    cvtColor(b2Dark, b2Dark, COLOR_BGR2HSV);
+    cvtColor(b3Dark, b3Dark, COLOR_BGR2HSV);
+    cvtColor(b4Dark, b4Dark, COLOR_BGR2HSV);
+
+
     double b1OrigValue[3];
     getAverageValues(b1Orig, b1OrigValue);
     double b2OrigValue[3];
@@ -125,6 +139,10 @@ int main() {
 
 
     Mat newImg = colorCalibrateImage(src, transformation);
+    cvtColor(src, src, COLOR_HSV2BGR);
+    cvtColor(newImg, newImg, COLOR_HSV2BGR);
+    cvtColor(original, original, COLOR_HSV2BGR);
+
     imshow("blue image", src);
     imshow("calibrated image", newImg);
     imshow("original", original);

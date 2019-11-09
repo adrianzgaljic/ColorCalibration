@@ -23,6 +23,8 @@ iostream
 -
 TransformationFinder.h
 /Users/adrianzgaljic/ColorCalibration/TransformationFinder.h
+opencv2/imgproc/imgproc.hpp
+/Users/adrianzgaljic/ColorCalibration/opencv2/imgproc/imgproc.hpp
 
 /usr/local/Cellar/opencv/4.1.1_2/include/opencv4/opencv2/calib3d.hpp
 opencv2/core.hpp
@@ -843,6 +845,10 @@ opencv2/core.hpp
 /usr/local/Cellar/opencv/4.1.1_2/include/opencv4/opencv2/imgproc.hpp
 opencv2/core.hpp
 /usr/local/Cellar/opencv/4.1.1_2/include/opencv4/opencv2/opencv2/core.hpp
+
+/usr/local/Cellar/opencv/4.1.1_2/include/opencv4/opencv2/imgproc/imgproc.hpp
+opencv2/imgproc.hpp
+/usr/local/Cellar/opencv/4.1.1_2/include/opencv4/opencv2/imgproc/opencv2/imgproc.hpp
 
 /usr/local/Cellar/opencv/4.1.1_2/include/opencv4/opencv2/ml.hpp
 opencv2/core.hpp
