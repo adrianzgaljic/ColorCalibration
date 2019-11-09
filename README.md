@@ -30,9 +30,34 @@ Mapping parameters for each channel can be computed separately, having 3 unknown
 
 ## Example
 
-Original and altered image
 
-<img src="https://github.com/adrianzgaljic/ColorCalibration/blob/master/cmake-build-debug/original.jpg" alt="drawing" width="200"/>   <img src="https://github.com/adrianzgaljic/ColorCalibration/blob/master/cmake-build-debug/processed_image.jpg" alt="drawing" width="200"/>  <img src="https://github.com/adrianzgaljic/ColorCalibration/blob/master/cmake-build-debug/examplee.png" alt="drawing" width="200"/>
+<p>Original, altered and calibrated image</p>
+
+<img src="https://github.com/adrianzgaljic/ColorCalibration/blob/master/cmake-build-debug/original.jpg" alt="drawing" width="200"/>   <img src="https://github.com/adrianzgaljic/ColorCalibration/blob/master/cmake-build-debug/processed_image.jpg" alt="drawing" width="200"/>  <img src="https://github.com/adrianzgaljic/ColorCalibration/blob/master/cmake-build-debug/calibrated.jpg" alt="drawing" width="200"/>
+
+<img src="https://github.com/adrianzgaljic/ColorCalibration/blob/master/cmake-build-debug/example.png" alt="drawing" width="400"/>
+
+## Next steps
+
+### Using color chart with more than 3 colors
+
+With more than 3 colors, we would have a linear system with the number of equations more than the number of variables.
+This can be solved with some kind of regression algorithm. Least squares, polynomial regression, neural network?
+It is also important to choose colors that give best result with color scales used in test strips.
+
+### Using other color spaces
+
+Using color spaces other than RGB, like YUV or HSV, could produce better results?
+
+## Links
+https://stackoverflow.com/questions/35785663/map-one-cameras-colour-profile-to-another
+https://blog.francium.tech/using-machine-learning-for-color-calibration-with-a-color-checker-d9f0895eafdb
+https://www.learnopencv.com/color-spaces-in-opencv-cpp-python/
+https://sci-hub.tw/10.1109/TIP.2015.2405336
+https://sci-hub.tw/https://doi.org/10.3390/s120607063
+
+
+
 
 
             
