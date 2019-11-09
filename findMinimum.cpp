@@ -9,7 +9,7 @@ using namespace std;
 /*
  * params = [rows][B G R B'] || [rows][B G R G'] || [rows][B G R R']
  */
-double* getCoefficients(double params[][6], int rows, int color, int coeffRow){
+double* getCoefficients(double originalColor[][3], double trueColor[][3], int rows, int color){
     double a = 0;
     double b = 0;
     double c = 0;
@@ -18,26 +18,26 @@ double* getCoefficients(double params[][6], int rows, int color, int coeffRow){
     //blue
     if (color == 0) {
         for (int i = 0; i < rows; i++) {
-            a += 2 * params[i][0] * params[i][0];
-            b += 2 * params[i][0] * params[i][1];
-            c += 2 * params[i][0] * params[i][2];
-            d += 2 * params[i][0] * params[i][3 + coeffRow];
+            a += 2 * originalColor[i][0] * originalColor[i][0];
+            b += 2 * originalColor[i][0] * originalColor[i][1];
+            c += 2 * originalColor[i][0] * originalColor[i][2];
+            d += 2 * originalColor[i][0] * trueColor[i][0];
         }
     //green
     } else if (color == 1){
         for (int i = 0; i < rows; i++) {
-            a += 2 * params[i][0] * params[i][1];
-            b += 2 * params[i][1] * params[i][1];
-            c += 2 * params[i][1] * params[i][2];
-            d += 2 * params[i][1] * params[i][3 + coeffRow];
+            a += 2 * originalColor[i][0] * originalColor[i][1];
+            b += 2 * originalColor[i][1] * originalColor[i][1];
+            c += 2 * originalColor[i][1] * originalColor[i][2];
+            d += 2 * originalColor[i][1] * trueColor[i][1];
         }
     //red
     } else if (color == 2){
         for (int i = 0; i < rows; i++) {
-            a += 2 * params[i][0] * params[i][2];
-            b += 2 * params[i][1] * params[i][2];
-            c += 2 * params[i][2] * params[i][2];
-            d += 2 * params[i][2] * params[i][3 + coeffRow];
+            a += 2 * originalColor[i][0] * originalColor[i][2];
+            b += 2 * originalColor[i][1] * originalColor[i][2];
+            c += 2 * originalColor[i][2] * originalColor[i][2];
+            d += 2 * originalColor[i][2] * trueColor[i][2];
         }
     }
     double* result = new double[4]{a, b, c, d};
@@ -85,26 +85,30 @@ double* transformColor(double color[3], double transformationMatrix[3][3]){
     return newColor;
 }
 
+double* getTransformationMatrix(){
+    double transformationMatrix[3][3];
+    return reinterpret_cast<double *>(transformationMatrix);
+}
 
 
 int main(){
     cout << "bok" << endl;
 
-    double paramsBlue[3][6] = {{112, 115, 131, 196, 165, 113},
-                           {111, 51, 202, 196, 38, 210},
-                           {80, 228, 211, 169, 242, 221}};
-    double paramsGreen[3][6] = {{112, 115, 131, 196, 165, 113},
-                               {111, 51, 202, 196, 38, 210},
-                               {80, 228, 211, 169, 242, 221}};
-    double paramsRed[3][6] = {{112, 115, 131, 196, 165, 113},
-                               {111, 51, 202, 196, 38, 210},
-                               {80, 228, 211, 169, 242, 221}};
+    double originalColor[3][3] = {{112, 115, 131},
+                           {111, 51, 202},
+                           {80, 228, 211}};
+    double trueColor[3][3] = {{196, 165, 113},
+                              {196, 38, 210},
+                              {169, 242, 221}};
+
+
+
 
     double transformationMatrix[3][3];
     for (int coeffRow=0; coeffRow<3; coeffRow++){
-        double* coeffsBlue = getCoefficients(paramsBlue, 3, 0, coeffRow);
-        double* coeffsGreen = getCoefficients(paramsGreen, 3, 1, coeffRow);
-        double* coeffsRed = getCoefficients(paramsRed, 3, 2, coeffRow);
+        double* coeffsBlue = getCoefficients(originalColor, trueColor, 3, 0);
+        double* coeffsGreen = getCoefficients(originalColor, trueColor,3, 1);
+        double* coeffsRed = getCoefficients(originalColor, trueColor, 3, 2);
 
         double mat[3][3] = {{coeffsBlue[0], coeffsBlue[1], coeffsBlue[2]},{coeffsGreen[0], coeffsGreen[1], coeffsGreen[2]},{coeffsRed[0], coeffsRed[1], coeffsRed[2]}};
         double* result = findMatrixInverse(mat);
@@ -123,12 +127,9 @@ int main(){
         cout << "\n";
     }
     double color[3] = {112, 115, 131};
-    double nColor[3];
     double* newColor = transformColor(color, transformationMatrix);
 
-    cout << newColor[2] << endl;
-    cout << newColor[0] << endl;
-    cout << newColor[0] << endl;
+
 
     return 0;
 }
