@@ -5,8 +5,8 @@ set(CMAKE_CXX_STANDARD 11)
 
 find_package(OpenCV REQUIRED core imgproc highgui features2d)
 
-
-add_executable(opencv ${SOURCE_FILES} findMinimum.cpp)
+set(SOURCE_FILES TransformationFinder.cpp TransformationFinder.h)
+add_executable(opencv ${SOURCE_FILES} findMinimum.cpp )
 
 include_directories(${OpenCV_INCLUDE_DIRS})
 target_link_libraries(opencv ${OpenCV_LIBS})

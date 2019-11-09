@@ -82,6 +82,12 @@
 				</MakeCommands>
 			</Target>
 		</Build>
+		<Unit filename="/Users/adrianzgaljic/ColorCalibration/TransformationFinder.cpp">
+			<Option target="opencv"/>
+		</Unit>
+		<Unit filename="/Users/adrianzgaljic/ColorCalibration/TransformationFinder.h">
+			<Option target="opencv"/>
+		</Unit>
 		<Unit filename="/Users/adrianzgaljic/ColorCalibration/findMinimum.cpp">
 			<Option target="opencv"/>
 		</Unit>

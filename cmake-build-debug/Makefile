@@ -123,6 +123,33 @@ opencv/fast:
 	$(MAKE) -f CMakeFiles/opencv.dir/build.make CMakeFiles/opencv.dir/build
 .PHONY : opencv/fast
 
+TransformationFinder.o: TransformationFinder.cpp.o
+
+.PHONY : TransformationFinder.o
+
+# target to build an object file
+TransformationFinder.cpp.o:
+	$(MAKE) -f CMakeFiles/opencv.dir/build.make CMakeFiles/opencv.dir/TransformationFinder.cpp.o
+.PHONY : TransformationFinder.cpp.o
+
+TransformationFinder.i: TransformationFinder.cpp.i
+
+.PHONY : TransformationFinder.i
+
+# target to preprocess a source file
+TransformationFinder.cpp.i:
+	$(MAKE) -f CMakeFiles/opencv.dir/build.make CMakeFiles/opencv.dir/TransformationFinder.cpp.i
+.PHONY : TransformationFinder.cpp.i
+
+TransformationFinder.s: TransformationFinder.cpp.s
+
+.PHONY : TransformationFinder.s
+
+# target to generate assembly for a file
+TransformationFinder.cpp.s:
+	$(MAKE) -f CMakeFiles/opencv.dir/build.make CMakeFiles/opencv.dir/TransformationFinder.cpp.s
+.PHONY : TransformationFinder.cpp.s
+
 findMinimum.o: findMinimum.cpp.o
 
 .PHONY : findMinimum.o
@@ -159,6 +186,9 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... edit_cache"
 	@echo "... opencv"
+	@echo "... TransformationFinder.o"
+	@echo "... TransformationFinder.i"
+	@echo "... TransformationFinder.s"
 	@echo "... findMinimum.o"
 	@echo "... findMinimum.i"
 	@echo "... findMinimum.s"

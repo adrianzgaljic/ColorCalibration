@@ -6,7 +6,15 @@
 
 #IncludeRegexTransform: 
 
+/Users/adrianzgaljic/ColorCalibration/TransformationFinder.cpp
+TransformationFinder.h
+/Users/adrianzgaljic/ColorCalibration/TransformationFinder.h
+
+/Users/adrianzgaljic/ColorCalibration/TransformationFinder.h
+
 /Users/adrianzgaljic/ColorCalibration/findMinimum.cpp
 iostream
 -
+TransformationFinder.h
+/Users/adrianzgaljic/ColorCalibration/TransformationFinder.h
 
