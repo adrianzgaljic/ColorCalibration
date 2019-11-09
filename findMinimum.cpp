@@ -9,7 +9,7 @@ using namespace std;
 /*
  * params = [rows][B G R B'] || [rows][B G R G'] || [rows][B G R R']
  */
-double* getCoefficients(double originalColor[][3], double trueColor[][3], int rows, int color){
+double* getCoefficients(double originalColor[][3], double trueColor[][3], int rows, int color, int coeffRow){
     double a = 0;
     double b = 0;
     double c = 0;
@@ -21,7 +21,7 @@ double* getCoefficients(double originalColor[][3], double trueColor[][3], int ro
             a += 2 * originalColor[i][0] * originalColor[i][0];
             b += 2 * originalColor[i][0] * originalColor[i][1];
             c += 2 * originalColor[i][0] * originalColor[i][2];
-            d += 2 * originalColor[i][0] * trueColor[i][0];
+            d += 2 * originalColor[i][0] * trueColor[i][coeffRow];
         }
     //green
     } else if (color == 1){
@@ -29,7 +29,7 @@ double* getCoefficients(double originalColor[][3], double trueColor[][3], int ro
             a += 2 * originalColor[i][0] * originalColor[i][1];
             b += 2 * originalColor[i][1] * originalColor[i][1];
             c += 2 * originalColor[i][1] * originalColor[i][2];
-            d += 2 * originalColor[i][1] * trueColor[i][1];
+            d += 2 * originalColor[i][1] * trueColor[i][coeffRow];
         }
     //red
     } else if (color == 2){
@@ -37,7 +37,7 @@ double* getCoefficients(double originalColor[][3], double trueColor[][3], int ro
             a += 2 * originalColor[i][0] * originalColor[i][2];
             b += 2 * originalColor[i][1] * originalColor[i][2];
             c += 2 * originalColor[i][2] * originalColor[i][2];
-            d += 2 * originalColor[i][2] * trueColor[i][2];
+            d += 2 * originalColor[i][2] * trueColor[i][coeffRow];
         }
     }
     double* result = new double[4]{a, b, c, d};
@@ -106,9 +106,9 @@ int main(){
 
     double transformationMatrix[3][3];
     for (int coeffRow=0; coeffRow<3; coeffRow++){
-        double* coeffsBlue = getCoefficients(originalColor, trueColor, 3, 0);
-        double* coeffsGreen = getCoefficients(originalColor, trueColor,3, 1);
-        double* coeffsRed = getCoefficients(originalColor, trueColor, 3, 2);
+        double* coeffsBlue = getCoefficients(originalColor, trueColor, 3, 0, coeffRow);
+        double* coeffsGreen = getCoefficients(originalColor, trueColor,3, 1, coeffRow);
+        double* coeffsRed = getCoefficients(originalColor, trueColor, 3, 2, coeffRow);
 
         double mat[3][3] = {{coeffsBlue[0], coeffsBlue[1], coeffsBlue[2]},{coeffsGreen[0], coeffsGreen[1], coeffsGreen[2]},{coeffsRed[0], coeffsRed[1], coeffsRed[2]}};
         double* result = findMatrixInverse(mat);
