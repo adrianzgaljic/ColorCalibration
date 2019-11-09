@@ -5,7 +5,7 @@ set(CMAKE_DEPENDS_LANGUAGES
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
   "/Users/adrianzgaljic/ColorCalibration/TransformationFinder.cpp" "/Users/adrianzgaljic/ColorCalibration/cmake-build-debug/CMakeFiles/opencv.dir/TransformationFinder.cpp.o"
-  "/Users/adrianzgaljic/ColorCalibration/findMinimum.cpp" "/Users/adrianzgaljic/ColorCalibration/cmake-build-debug/CMakeFiles/opencv.dir/findMinimum.cpp.o"
+  "/Users/adrianzgaljic/ColorCalibration/main.cpp" "/Users/adrianzgaljic/ColorCalibration/cmake-build-debug/CMakeFiles/opencv.dir/main.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "AppleClang")
 

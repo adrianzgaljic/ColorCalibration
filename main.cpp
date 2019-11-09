@@ -3,6 +3,7 @@
 #include <opencv2/highgui/highgui.hpp>
 #include "opencv2/imgproc/imgproc.hpp"
 #include <iostream>
+#include "TransformationFinder.h"
 
 
 using namespace cv;
@@ -296,6 +297,41 @@ void colorCalibrateImage(Mat src, double calibrationMatrix[3][3]){
             ptr[x * 3 + 2] = static_cast<uchar>(newValues[2]); //blue
         }
     }
+    imshow("calibrated image", src);
+
+}
+
+void colorCalibrateImage2(Mat src, double** calibrationMatrix){
+
+    TransformationFinder tf;
+
+    for (int y = 0; y < src.rows; ++y) {
+        uchar *ptr = src.ptr<uchar>(y);
+        for (int x = 0; x < src.cols; ++x) {
+
+            double* newValues;
+            double r = ptr[x*3];
+            double g = ptr[x*3 +1];
+            double b = ptr[x*3 +2];
+
+            double color[3] = {r, g, b};
+            newValues = tf.transformColor(color, calibrationMatrix);
+            for (int i=0; i<3; i++){
+                if (newValues[i] < 0){
+                    newValues[i] = 0;
+                } else if (newValues[i] > 255){
+                    newValues[i] = 255;
+                }
+            }
+
+
+            ptr[x * 3] = static_cast<uchar>(newValues[0]); //red
+            ptr[x * 3 + 1] = static_cast<uchar>(newValues[1]); //green
+            ptr[x * 3 + 2] = static_cast<uchar>(newValues[2]); //blue
+        }
+    }
+    imshow("calibrated image 2", src);
+
 
 }
 
@@ -303,6 +339,8 @@ int main() {
 
 
     Mat src = imread("processed_image.jpg", 1);
+    Mat src2 = imread("processed_image.jpg", 1);
+
     //cvtColor(src, src, COLOR_BGR2RGB);
 
     Mat b1_orig = imread("b1_original.jpg", 1);
@@ -355,6 +393,17 @@ int main() {
         cout << "\n";
     }
 
+    TransformationFinder tf;
+    double** transformation = tf.findTransformation(measuredColors, trueColors, 3);
+    for (int i=0; i<3; i++){
+        for (int j=0; j<3; j++){
+            cout << transformation[i][j] << ",";
+        }
+        cout << "\n";
+    }
+
+    colorCalibrateImage2(src2, transformation);
+
     cout << b1_darkValue[0] << endl;
     cout << b1_darkValue[1] << endl;
     cout << b1_darkValue[2] << endl;
@@ -394,7 +443,7 @@ int main() {
     colorCalibrateImage(src, result);
     //cvtColor(src, src, COLOR_BGR2RGB);
 
-    imshow("calibrated image", src);
+    //imshow("calibrated image", src);
     Mat light = imread("original.jpg", 1);
     //cvtColor(light, light, COLOR_BGR2RGB);
     imshow("original image", light);

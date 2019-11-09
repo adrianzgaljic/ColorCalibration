@@ -88,7 +88,7 @@
 		<Unit filename="/Users/adrianzgaljic/ColorCalibration/TransformationFinder.h">
 			<Option target="opencv"/>
 		</Unit>
-		<Unit filename="/Users/adrianzgaljic/ColorCalibration/findMinimum.cpp">
+		<Unit filename="/Users/adrianzgaljic/ColorCalibration/main.cpp">
 			<Option target="opencv"/>
 		</Unit>
 		<Unit filename="/Users/adrianzgaljic/ColorCalibration/CMakeLists.txt">

@@ -81,40 +81,40 @@ CMakeFiles/opencv.dir/TransformationFinder.cpp.o.provides: CMakeFiles/opencv.dir
 CMakeFiles/opencv.dir/TransformationFinder.cpp.o.provides.build: CMakeFiles/opencv.dir/TransformationFinder.cpp.o
 
 
-CMakeFiles/opencv.dir/findMinimum.cpp.o: CMakeFiles/opencv.dir/flags.make
-CMakeFiles/opencv.dir/findMinimum.cpp.o: ../findMinimum.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/adrianzgaljic/ColorCalibration/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/opencv.dir/findMinimum.cpp.o"
-	/Library/Developer/CommandLineTools/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/opencv.dir/findMinimum.cpp.o -c /Users/adrianzgaljic/ColorCalibration/findMinimum.cpp
+CMakeFiles/opencv.dir/main.cpp.o: CMakeFiles/opencv.dir/flags.make
+CMakeFiles/opencv.dir/main.cpp.o: ../main.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/adrianzgaljic/ColorCalibration/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/opencv.dir/main.cpp.o"
+	/Library/Developer/CommandLineTools/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/opencv.dir/main.cpp.o -c /Users/adrianzgaljic/ColorCalibration/main.cpp
 
-CMakeFiles/opencv.dir/findMinimum.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/opencv.dir/findMinimum.cpp.i"
-	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/adrianzgaljic/ColorCalibration/findMinimum.cpp > CMakeFiles/opencv.dir/findMinimum.cpp.i
+CMakeFiles/opencv.dir/main.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/opencv.dir/main.cpp.i"
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/adrianzgaljic/ColorCalibration/main.cpp > CMakeFiles/opencv.dir/main.cpp.i
 
-CMakeFiles/opencv.dir/findMinimum.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/opencv.dir/findMinimum.cpp.s"
-	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/adrianzgaljic/ColorCalibration/findMinimum.cpp -o CMakeFiles/opencv.dir/findMinimum.cpp.s
+CMakeFiles/opencv.dir/main.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/opencv.dir/main.cpp.s"
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/adrianzgaljic/ColorCalibration/main.cpp -o CMakeFiles/opencv.dir/main.cpp.s
 
-CMakeFiles/opencv.dir/findMinimum.cpp.o.requires:
+CMakeFiles/opencv.dir/main.cpp.o.requires:
 
-.PHONY : CMakeFiles/opencv.dir/findMinimum.cpp.o.requires
+.PHONY : CMakeFiles/opencv.dir/main.cpp.o.requires
 
-CMakeFiles/opencv.dir/findMinimum.cpp.o.provides: CMakeFiles/opencv.dir/findMinimum.cpp.o.requires
-	$(MAKE) -f CMakeFiles/opencv.dir/build.make CMakeFiles/opencv.dir/findMinimum.cpp.o.provides.build
-.PHONY : CMakeFiles/opencv.dir/findMinimum.cpp.o.provides
+CMakeFiles/opencv.dir/main.cpp.o.provides: CMakeFiles/opencv.dir/main.cpp.o.requires
+	$(MAKE) -f CMakeFiles/opencv.dir/build.make CMakeFiles/opencv.dir/main.cpp.o.provides.build
+.PHONY : CMakeFiles/opencv.dir/main.cpp.o.provides
 
-CMakeFiles/opencv.dir/findMinimum.cpp.o.provides.build: CMakeFiles/opencv.dir/findMinimum.cpp.o
+CMakeFiles/opencv.dir/main.cpp.o.provides.build: CMakeFiles/opencv.dir/main.cpp.o
 
 
 # Object files for target opencv
 opencv_OBJECTS = \
 "CMakeFiles/opencv.dir/TransformationFinder.cpp.o" \
-"CMakeFiles/opencv.dir/findMinimum.cpp.o"
+"CMakeFiles/opencv.dir/main.cpp.o"
 
 # External object files for target opencv
 opencv_EXTERNAL_OBJECTS =
 
 opencv: CMakeFiles/opencv.dir/TransformationFinder.cpp.o
-opencv: CMakeFiles/opencv.dir/findMinimum.cpp.o
+opencv: CMakeFiles/opencv.dir/main.cpp.o
 opencv: CMakeFiles/opencv.dir/build.make
 opencv: /usr/local/lib/libopencv_highgui.4.1.1.dylib
 opencv: /usr/local/lib/libopencv_features2d.4.1.1.dylib
@@ -133,7 +133,7 @@ CMakeFiles/opencv.dir/build: opencv
 .PHONY : CMakeFiles/opencv.dir/build
 
 CMakeFiles/opencv.dir/requires: CMakeFiles/opencv.dir/TransformationFinder.cpp.o.requires
-CMakeFiles/opencv.dir/requires: CMakeFiles/opencv.dir/findMinimum.cpp.o.requires
+CMakeFiles/opencv.dir/requires: CMakeFiles/opencv.dir/main.cpp.o.requires
 
 .PHONY : CMakeFiles/opencv.dir/requires
 

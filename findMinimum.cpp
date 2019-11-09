@@ -30,7 +30,7 @@ int main(){
         }
         cout << "\n";
     }
-    double color[3] = {112, 115, 131};
+    double color[3] = {80, 228, 211};
 
     double* newColor = tf.transformColor(color, transformation);
     for (int i=0; i<3; i++){
