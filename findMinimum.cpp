@@ -75,7 +75,7 @@ double* findMatrixInverse(double mat[3][3]){
     return reinterpret_cast<double *>(result);
 }
 
-double* transformColor(double color[3], double transformationMatrix[3][3]){
+double* transformColor(double color[3], double** transformationMatrix){
     double newColor[3] = {0, 0, 0};
     for (int i=0; i<3; i++){
         for (int j=0; j<3; j++){
@@ -85,9 +85,36 @@ double* transformColor(double color[3], double transformationMatrix[3][3]){
     return newColor;
 }
 
-double* getTransformationMatrix(){
-    double transformationMatrix[3][3];
-    return reinterpret_cast<double *>(transformationMatrix);
+double** getTransformationMatrix(double originalColor[][3], double trueColor[][3], int noOfColors){
+    double** transformationMatrix;
+    transformationMatrix = new double*[3];
+    for (int i = 0; i < noOfColors; i++) {
+        transformationMatrix[i] = new double[3];
+    }
+    double* coeffsBlue;
+    double* coeffsGreen;
+    double* coeffsRed;
+    double* result;
+    double newBlue;
+    double newGreen;
+    double newRed;
+
+    for (int coeffRow=0; coeffRow<3; coeffRow++){
+        coeffsBlue = getCoefficients(originalColor, trueColor, noOfColors, 0, coeffRow);
+        coeffsGreen = getCoefficients(originalColor, trueColor, noOfColors, 1, coeffRow);
+        coeffsRed = getCoefficients(originalColor, trueColor, noOfColors, 2, coeffRow);
+
+        double mat[3][3] = {{coeffsBlue[0], coeffsBlue[1], coeffsBlue[2]},{coeffsGreen[0], coeffsGreen[1], coeffsGreen[2]},{coeffsRed[0], coeffsRed[1], coeffsRed[2]}};
+        result = findMatrixInverse(mat);
+        newBlue = coeffsBlue[3]*result[0] + coeffsGreen[3]*result[3] + coeffsRed[3]*result[6];
+        newGreen = coeffsBlue[3]*result[1] + coeffsGreen[3]*result[4] + coeffsRed[3]*result[7];
+        newRed = coeffsBlue[3]*result[2] + coeffsGreen[3]*result[5] + coeffsRed[3]*result[8];
+        transformationMatrix[coeffRow][0] = newBlue;
+        transformationMatrix[coeffRow][1] = newGreen;
+        transformationMatrix[coeffRow][2] = newRed;
+    }
+
+    return transformationMatrix;
 }
 
 
@@ -103,22 +130,8 @@ int main(){
 
 
 
-
-    double transformationMatrix[3][3];
-    for (int coeffRow=0; coeffRow<3; coeffRow++){
-        double* coeffsBlue = getCoefficients(originalColor, trueColor, 3, 0, coeffRow);
-        double* coeffsGreen = getCoefficients(originalColor, trueColor,3, 1, coeffRow);
-        double* coeffsRed = getCoefficients(originalColor, trueColor, 3, 2, coeffRow);
-
-        double mat[3][3] = {{coeffsBlue[0], coeffsBlue[1], coeffsBlue[2]},{coeffsGreen[0], coeffsGreen[1], coeffsGreen[2]},{coeffsRed[0], coeffsRed[1], coeffsRed[2]}};
-        double* result = findMatrixInverse(mat);
-        double newBlue = coeffsBlue[3]*result[0] + coeffsGreen[3]*result[3] + coeffsRed[3]*result[6];
-        double newGreen = coeffsBlue[3]*result[1] + coeffsGreen[3]*result[4] + coeffsRed[3]*result[7];
-        double newRed = coeffsBlue[3]*result[2] + coeffsGreen[3]*result[5] + coeffsRed[3]*result[8];
-        transformationMatrix[coeffRow][0] = newBlue;
-        transformationMatrix[coeffRow][1] = newGreen;
-        transformationMatrix[coeffRow][2] = newRed;
-    }
+    int noOfColors = 3;
+    double** transformationMatrix = getTransformationMatrix(originalColor, trueColor, noOfColors);
 
     for (int i=0; i<3; i++){
         for (int j=0; j<3; j++){
