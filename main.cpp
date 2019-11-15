@@ -23,10 +23,21 @@ void getAverageValues(Mat img, double values[3]){
             sumRed += ptr[x * 3 + 2];
         }
     }
-
     values[0] = sumBlue/noOfPixels;
     values[1] = sumGreen/noOfPixels;
     values[2] = sumRed/noOfPixels;
+}
+
+void getCalibrationPatternColors(double colors[][3], Mat image){
+
+    Mat cropped;
+    for (int i=0; i<6; i++){
+        for (int j=0; j<4; j++){
+            Rect roi(200*i+50, 200*j+50, 100, 100);
+            cropped = image(roi);
+            getAverageValues(cropped, colors[j*6+i]);
+        }
+    }
 }
 
 
@@ -66,6 +77,55 @@ Mat colorCalibrateImage(Mat original, double** calibrationMatrix){
 }
 
 int main() {
+    Mat img1 = imread("/Users/adrianzgaljic/Desktop/moneo/template_2.jpg",1);
+    for (int i=1; i<6; i++){
+        string name = "/Users/adrianzgaljic/Desktop/moneo/colors_example_" + to_string(i) + "_crop.jpg";
+
+        Mat img2 = imread(name,1);
+
+        //imshow("template 1", img1);
+        //imshow("tamplate 2", img2);
+        double colorsOriginal[24][3];
+        double colorsMeasured[24][3];
+        double colorsCalibrated[24][3];
+
+        getCalibrationPatternColors(colorsOriginal, img1);
+        getCalibrationPatternColors(colorsMeasured, img2);
+
+        double** transformation = tf.findTransformation(colorsMeasured, colorsOriginal, 4);
+
+        //tf.printTransformationMatrix(transformation);
+
+        Mat calibrated = colorCalibrateImage(img2, transformation);
+        getCalibrationPatternColors(colorsCalibrated, calibrated);
+        float error = tf.getError(colorsOriginal, colorsCalibrated, 4);
+
+
+        cout << "errro=" << error << endl;
+        imwrite("original.jpg", img1);
+        string badname = "before_calibration_"+to_string(i) + ".jpg";
+        string calibratedname = "calibrated_"+to_string(i) + ".jpg";
+
+        imwrite(badname, img2);
+        imwrite(calibratedname, calibrated);
+        //imshow("calibrated", calibrated);
+        //waitKey(0);
+    }
+    cout << "end" << endl;
+
+    /*
+    cout << "colors:" << endl;
+    cv::Mat mat(800, 1200, CV_8UC3, cv::Scalar(255,255,255));
+
+    for (int i=0; i<6; i++){
+        for (int j=0; j<4; j++){
+            circle(mat, Point(200*i+50,200*j+50),1, Scalar(colors[j*6+i][0],colors[j*6+i][1],colors[j*6+i][2]),100);
+        }
+    }
+
+    imshow("painting", mat);
+    waitKey(0);
+
 
 
     Mat src = imread("processed_image.jpg", 1);
@@ -166,8 +226,7 @@ int main() {
     imshow("new b1", newB1);
     imshow("dark b1", b1Dark);
     imshow("original b1", b1Orig);
-
-    waitKey(0);
+*/
 
 
 

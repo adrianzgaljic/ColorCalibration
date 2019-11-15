@@ -4,6 +4,7 @@
 
 #include "TransformationFinder.h"
 
+using namespace std;
 
 /*
  * params = [rows][B G R B'] || [rows][B G R G'] || [rows][B G R R']
@@ -77,7 +78,6 @@ double** getTransformationMatrix(double originalColor[][3], double trueColor[][3
     double newBlue;
     double newGreen;
     double newRed;
-
     for (int coeffRow=0; coeffRow<3; coeffRow++){
         coeffsBlue = getCoefficients(originalColor, trueColor, noOfColors, 0, coeffRow);
         coeffsGreen = getCoefficients(originalColor, trueColor, noOfColors, 1, coeffRow);
@@ -123,3 +123,11 @@ float TransformationFinder::getError(double originalColor[][3], double trueColor
     return error/rows;
 }
 
+void TransformationFinder::printTransformationMatrix(double** transformationMatrix){
+    for (int i=0; i<3; i++){
+        for(int j=0; j<3; j++){
+            cout << transformationMatrix[i][j] << ",";
+        }
+        cout << "\n";
+    }
+}
