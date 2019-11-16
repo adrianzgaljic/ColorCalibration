@@ -45,7 +45,8 @@ This system has the same number of equations and unknowns and has a single uniqu
 <p>And the overall error is the sum of errors for each color.</p>
 <p>Mapping function is than calculated by finding the minimum of overall error function.</p>
 
-<p>Five photos of color chart were taken under different lightning conditions to test the algorithm:</p>
+<p>Five photos of color chart were taken under different lightning conditions to test the algorithm,</p>
+<p>here are examples before and after the calibration:</p>
 
 <img src="https://github.com/adrianzgaljic/ColorCalibration/blob/master/cmake-build-debug/calibration_before.gif" alt="drawing" width="200"/>   <img src="https://github.com/adrianzgaljic/ColorCalibration/blob/master/cmake-build-debug/calibration_after_all.gif" alt="drawing" width="200"/> <img src="https://github.com/adrianzgaljic/ColorCalibration/blob/master/cmake-build-debug/calibration_changes.gif" alt="drawing" width="200"/>
 
