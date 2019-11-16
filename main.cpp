@@ -367,6 +367,7 @@ int main() {
     //cvtColor(src, src, COLOR_BGR2RGB);
 
     imshow("before calibration", src);
+    imwrite("processed_with_3_colors.jpg", src);
 
     colorCalibrateImage(src, result);
     //cvtColor(src, src, COLOR_BGR2RGB);
@@ -375,7 +376,9 @@ int main() {
     Mat light = imread("original.jpg", 1);
     //cvtColor(light, light, COLOR_BGR2RGB);
     imshow("original image", light);
-    imwrite("calibrated.jpg", src);
+    imwrite("calibrated_with_3_colors.jpg", src);
+    imwrite("original_with_3_colors.jpg", light);
+
     waitKey(0);
 
 
