@@ -92,13 +92,13 @@ int main() {
         getCalibrationPatternColors(colorsOriginal, img1);
         getCalibrationPatternColors(colorsMeasured, img2);
 
-        double** transformation = tf.findTransformation(colorsMeasured, colorsOriginal, 4);
+        double** transformation = tf.findTransformation(colorsMeasured, colorsOriginal, 24);
 
         //tf.printTransformationMatrix(transformation);
 
         Mat calibrated = colorCalibrateImage(img2, transformation);
         getCalibrationPatternColors(colorsCalibrated, calibrated);
-        float error = tf.getError(colorsOriginal, colorsCalibrated, 4);
+        float error = tf.getError(colorsOriginal, colorsMeasured, 24);
 
 
         cout << "errro=" << error << endl;
