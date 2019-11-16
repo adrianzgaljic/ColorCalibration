@@ -2,8 +2,8 @@
 
 ## Algorithm for color calibrating images.
 
-The goal is to have the same color representation on each image, regardless of lighting conditions, camera models, etc.
-This can be achieved by using color calibration chart with known values (https://en.wikipedia.org/wiki/ColorChecker).
+The goal is to have the same color representation of each image, regardless of lighting conditions, camera models, etc.
+This can be achieved by using a color calibration chart with known values (https://en.wikipedia.org/wiki/ColorChecker).
 Colors on the chart will be different on each image. This values are then used to calculate a mapping function between measured and true color values.
 This mapping function is then used to color calibrate entire image.
 
@@ -17,7 +17,7 @@ This mapping function is then used to color calibrate entire image.
   [p7 p8 p9]
  </p>
 
-<p>To color calibrate image, each pixel P is multiplied with mapping function M to get new pixel P'</p>
+<p>To color calibrate the image, each pixel P is multiplied with mapping function M to get new pixel P'</p>
 
 P = [R G B]<br>
 P' = [R' G' B']<br>
@@ -25,9 +25,9 @@ P' = M * P
 
 ## Example
 
-### Using 3 colors to calculate mapping function
+### Using 3 colors to calculate the mapping function
 
-The simplest solution is to use color chart with 3 known colors, each consiting of 3 values for red, green and blue channel.
+The simplest solution is to use color chart with 3 known colors, each consisting of 3 values for red, green and blue channel.
 Mapping parameters for each channel can be computed separately, having 3 unknowns and 3 equations.
 This system has the same number of equations and unknowns and has a single unique solution: mapping function M.
 
@@ -40,32 +40,28 @@ This system has the same number of equations and unknowns and has a single uniqu
 
 ### Using more colors to calculate mapping function
 
-Previous solution will work well for the 3 colors that were used to calculate the mapping function, but will fail to map other colors correctly. If more colors are used for calculation of the mapping function, this is a system with more equations than unknowns and there is no solution. This means that mapping function has to be estimated to optimally work with all the colors. This is done by defining the calibration error:
-Error = (Original color - Calibrated color)^2
-And the overall error is sum of errors for all colors.
-Mapping function is than calculated by finding the minimum of overall error function.
+<p>The previous solution will work well for the 3 colors that were used to calculate the mapping function, but will fail to map other colors correctly. If more colors are used for calculation of the mapping function, this is a system with more equations than unknowns and there is no solution. This means that mapping function has to be estimated to optimally work with all the colors. This is done by defining the calibration error:</p>
+<p>Error = (Original color - Calibrated color)^2</p>
+<p>And the overall error is the sum of errors for each color.</p>
+<p>Mapping function is than calculated by finding the minimum of overall error function.</p>
 
-With more than 3 colors, we would have a linear system with the number of equations more than the number of variables.
-This can be solved with some kind of regression algorithm. Least squares, polynomial regression, neural network?
-It is also important to choose colors that give best result with color scales used in test strips.
-
-Five photos of color chart were taken under different lightning conditions to test the algorithm:
+<p>Five photos of color chart were taken under different lightning conditions to test the algorithm:</p>
 
 <img src="https://github.com/adrianzgaljic/ColorCalibration/blob/master/cmake-build-debug/calibration_before.gif" alt="drawing" width="200"/>   <img src="https://github.com/adrianzgaljic/ColorCalibration/blob/master/cmake-build-debug/calibration_after_all.gif" alt="drawing" width="200"/> <img src="https://github.com/adrianzgaljic/ColorCalibration/blob/master/cmake-build-debug/calibration_changes.gif" alt="drawing" width="200"/>
 
-Overall error for each image before calibration:
-Image 1 error: 2765.99
-Image 2 error: 24468.1
-Image 3 error: 9771.38
-Image 4 error: 7792.67
-Image 5 error: 1262.42
+<p>Overall error for each image before calibration:</p>
+<p>Image 1 error: <strong>2765.99</strong></p>
+<p>Image 2 error: <strong>24468.1</strong></p>
+<p>Image 3 error: <strong>9771.38</strong></p>
+<p>Image 4 error: <strong>7792.67</strong></p>
+<p>Image 5 error: <strong>1262.42</strong></p>
 
-Overall error for each image after calibration:
-Image 1 error: 55.9662
-Image 2 error: 410.455
-Image 3 error: 193.925
-Image 4 error: 102.541
-Image 5 error: 137.367
+<p>Overall error for each image after calibration:</p>
+<p>Image 1 error: <strong>55.9662</strong></p>
+<p>Image 2 error: <strong>410.455</strong></p>
+<p>Image 3 error: <strong>193.925</strong></p>
+<p>Image 4 error: <strong>102.541</strong></p>
+<p>Image 5 error: <strong>137.367</strong></p>
 
 
 
@@ -77,8 +73,8 @@ Image 5 error: 137.367
 
 ### Using a neural network 
 
-Neural netwrok seems to produce fair results but is unacceptably slow because it needs to be trained in real time.
-Project can be found here: https://github.com/adrianzgaljic/ColorCalibratorNN
+Neural network seems to produce fair results, but is unacceptably slow because it needs to be trained in real time.
+The project can be found here: https://github.com/adrianzgaljic/ColorCalibratorNN
 Here are results using 3, 4 and 5 colors:
 
 
@@ -87,7 +83,7 @@ Here are results using 3, 4 and 5 colors:
 
 ### Using other color spaces
 
-Using color spaces other than RGB, like YUV or HSV, could produce better results?
+Could using color spaces other than RGB, like YUV or HSV, produce better results?
 
 ## Links
 https://stackoverflow.com/questions/35785663/map-one-cameras-colour-profile-to-another
