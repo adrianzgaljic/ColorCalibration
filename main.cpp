@@ -98,10 +98,10 @@ int main() {
 
         Mat calibrated = colorCalibrateImage(img2, transformation);
         getCalibrationPatternColors(colorsCalibrated, calibrated);
-        float error = tf.getError(colorsOriginal, colorsMeasured, 24);
+        float error = tf.getError(colorsOriginal, colorsCalibrated, 24);
 
 
-        cout << "errro=" << error << endl;
+        cout << "Image " << i << " error: " << error << endl;
         imwrite("original.jpg", img1);
         string badname = "before_calibration_"+to_string(i) + ".jpg";
         string calibratedname = "calibrated_"+to_string(i) + ".jpg";
