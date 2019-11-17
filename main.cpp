@@ -3,6 +3,8 @@
 #include <iostream>
 #include "TransformationFinder.h"
 #include "opencv2/imgproc/imgproc.hpp"
+#include <time.h>
+
 
 
 using namespace cv;
@@ -78,89 +80,50 @@ Mat colorCalibrateImage(Mat original, double** calibrationMatrix){
 
 int main() {
     Mat img1 = imread("/Users/adrianzgaljic/Desktop/moneo/template_2.jpg",1);
+
     for (int i=1; i<6; i++){
+        clock_t start = clock();
+
         string name = "/Users/adrianzgaljic/Desktop/moneo/colors_example_" + to_string(i) + "_crop.jpg";
 
         Mat img2 = imread(name,1);
 
         //imshow("template 1", img1);
         //imshow("tamplate 2", img2);
-        double colorsOriginal[24][3] = {{58.5294,57.426,78.2718},
-                                        {127.671,147.432,209.591},
-                                        {133.254,88.9616,58.6076},
-                                        {59.437,80.7323,67.2436},
-                                        {157.154,102.862,107.876},
-                                        {171.962,160.647,100.527},
-                                        {77.5302,122.323,216.714},
-                                        {113.189,56.3573,44.3978},
-                                        {79.5075,76.8823,198.83},
-                                        {57.1133,42.2223,67.1341},
-                                        {85.1689,202.049,193.953},
-                                        {87.1829,177.732,233.46},
-                                        {87.0296,43.6037,36.0002},
-                                        {69.0687,112.886,56.5272},
-                                        {59.6939,62.8469,174.845},
-                                        {74.7436,206.738,242.005},
-                                        {99.9298,65.0791,186.493},
-                                        {143.477,95.9974,37.1511},
-                                        {219.074,223.796,222.921},
-                                        {186.148,195.182,192.855},
-                                        {146.751,150.749,143.786},
-                                        {81.4193,77.6105,73.4242},
-                                        {53.1454,51.3285,50.4228},
-                                        {47.755,48.68,46.7962}};
-        double colorsMeasured[24][3] = {{51.6141,56.248,74.9317},
-                                        {91.01,111.66,170},
-                                        {96.4035,78.7292,60.2098},
-                                        {50.8625,68.3794,64.5278},
-                                        {110.162,88.0861,93.0134},
-                                        {121.64,123.875,86.4004},
-                                        {56.4552,92.2475,173.409},
-                                        {77.9926,49.6949,44.2661},
-                                        {57.3029,61.7022,163.373},
-                                        {43.7999,40.3381,61.1437},
-                                        {58.2932,147.889,152.954},
-                                        {59.4429,129.151,188.855},
-                                        {59.0748,42.9886,41.3845},
-                                        {51.02,83.5365,48.7715},
-                                        {43.7268,50.4078,146.058},
-                                        {52.8446,149.39,193.45},
-                                        {69.5824,58.6813,157.358},
-                                        {104.314,77.7657,41.956},
-                                        {148.487,165.805,174.594},
-                                        {128.59,148.43,154.163},
-                                        {103.318,115.795,115.824},
-                                        {56.6364,60.2838,60.3702},
-                                        {37.2944,41.2811,42.8361},
-                                        {33.5171,38.5809,39.5095}
-        };
+        double colorsOriginal[24][3];
+        double colorsMeasured[24][3];
         double colorsCalibrated[24][3];
 
-        //getCalibrationPatternColors(colorsOriginal, img1);
-       // getCalibrationPatternColors(colorsMeasured, img2);
+        getCalibrationPatternColors(colorsOriginal, img1);
+       getCalibrationPatternColors(colorsMeasured, img2);
 
         double** transformation = tf.findTransformation(colorsMeasured, colorsOriginal, 24);
 
-        //tf.printTransformationMatrix(transformation);
 
+        //tf.printTransformationMatrix(transformation);
         Mat calibrated = colorCalibrateImage(img2, transformation);
+
         getCalibrationPatternColors(colorsCalibrated, calibrated);
         float error = tf.getError(colorsOriginal, colorsCalibrated, 24);
 
-
+/*
         cout << "Image " << i << " error: " << error << endl;
         imwrite("original.jpg", img1);
         string badname = "before_calibration_"+to_string(i) + ".jpg";
         string calibratedname = "calibrated_"+to_string(i) + ".jpg";
 
-        imwrite(badname, img2);
+        //imwrite(badname, img2);
         imwrite(calibratedname, calibrated);
-        //imshow("calibrated", calibrated);
+        imshow("calibrated", calibrated);
         //waitKey(0);
-
+        */
+        clock_t stop = clock();
+        double elapsed = (double) (stop - start) / CLOCKS_PER_SEC;
+        printf("\nTime elapsed: %.5f", elapsed);
+        cout << "end" << endl;
 
     }
-    cout << "end" << endl;
+
 
     /*
     cout << "colors:" << endl;
