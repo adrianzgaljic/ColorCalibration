@@ -78,7 +78,7 @@ Mat colorCalibrateImage(Mat original, double** calibrationMatrix){
 
 int main() {
     Mat img1 = imread("/Users/adrianzgaljic/Desktop/moneo/template_2.jpg",1);
-    for (int i=1; i<2; i++){
+    for (int i=1; i<6; i++){
         string name = "/Users/adrianzgaljic/Desktop/moneo/colors_example_" + to_string(i) + "_crop.jpg";
 
         Mat img2 = imread(name,1);
@@ -142,7 +142,7 @@ int main() {
         double** transformation = tf.findTransformation(colorsMeasured, colorsOriginal, 24);
 
         //tf.printTransformationMatrix(transformation);
-/*
+
         Mat calibrated = colorCalibrateImage(img2, transformation);
         getCalibrationPatternColors(colorsCalibrated, calibrated);
         float error = tf.getError(colorsOriginal, colorsCalibrated, 24);
@@ -157,7 +157,8 @@ int main() {
         imwrite(calibratedname, calibrated);
         //imshow("calibrated", calibrated);
         //waitKey(0);
-        */
+
+
     }
     cout << "end" << endl;
 
