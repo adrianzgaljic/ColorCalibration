@@ -1,6 +1,6 @@
 file(REMOVE_RECURSE
   "CMakeFiles/opencv.dir/TransformationFinder.cpp.o"
-  "CMakeFiles/opencv.dir/main.cpp.o"
+  "CMakeFiles/opencv.dir/StripTest.cpp.o"
   "opencv.pdb"
   "opencv"
 )

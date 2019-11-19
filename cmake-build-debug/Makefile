@@ -123,6 +123,33 @@ opencv/fast:
 	$(MAKE) -f CMakeFiles/opencv.dir/build.make CMakeFiles/opencv.dir/build
 .PHONY : opencv/fast
 
+StripTest.o: StripTest.cpp.o
+
+.PHONY : StripTest.o
+
+# target to build an object file
+StripTest.cpp.o:
+	$(MAKE) -f CMakeFiles/opencv.dir/build.make CMakeFiles/opencv.dir/StripTest.cpp.o
+.PHONY : StripTest.cpp.o
+
+StripTest.i: StripTest.cpp.i
+
+.PHONY : StripTest.i
+
+# target to preprocess a source file
+StripTest.cpp.i:
+	$(MAKE) -f CMakeFiles/opencv.dir/build.make CMakeFiles/opencv.dir/StripTest.cpp.i
+.PHONY : StripTest.cpp.i
+
+StripTest.s: StripTest.cpp.s
+
+.PHONY : StripTest.s
+
+# target to generate assembly for a file
+StripTest.cpp.s:
+	$(MAKE) -f CMakeFiles/opencv.dir/build.make CMakeFiles/opencv.dir/StripTest.cpp.s
+.PHONY : StripTest.cpp.s
+
 TransformationFinder.o: TransformationFinder.cpp.o
 
 .PHONY : TransformationFinder.o
@@ -150,33 +177,6 @@ TransformationFinder.cpp.s:
 	$(MAKE) -f CMakeFiles/opencv.dir/build.make CMakeFiles/opencv.dir/TransformationFinder.cpp.s
 .PHONY : TransformationFinder.cpp.s
 
-main.o: main.cpp.o
-
-.PHONY : main.o
-
-# target to build an object file
-main.cpp.o:
-	$(MAKE) -f CMakeFiles/opencv.dir/build.make CMakeFiles/opencv.dir/main.cpp.o
-.PHONY : main.cpp.o
-
-main.i: main.cpp.i
-
-.PHONY : main.i
-
-# target to preprocess a source file
-main.cpp.i:
-	$(MAKE) -f CMakeFiles/opencv.dir/build.make CMakeFiles/opencv.dir/main.cpp.i
-.PHONY : main.cpp.i
-
-main.s: main.cpp.s
-
-.PHONY : main.s
-
-# target to generate assembly for a file
-main.cpp.s:
-	$(MAKE) -f CMakeFiles/opencv.dir/build.make CMakeFiles/opencv.dir/main.cpp.s
-.PHONY : main.cpp.s
-
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -186,12 +186,12 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... edit_cache"
 	@echo "... opencv"
+	@echo "... StripTest.o"
+	@echo "... StripTest.i"
+	@echo "... StripTest.s"
 	@echo "... TransformationFinder.o"
 	@echo "... TransformationFinder.i"
 	@echo "... TransformationFinder.s"
-	@echo "... main.o"
-	@echo "... main.i"
-	@echo "... main.s"
 .PHONY : help
 
 

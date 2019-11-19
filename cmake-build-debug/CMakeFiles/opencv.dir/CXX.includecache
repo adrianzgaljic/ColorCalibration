@@ -6,6 +6,16 @@
 
 #IncludeRegexTransform: 
 
+/Users/adrianzgaljic/ColorCalibration/StripTest.cpp
+opencv2/imgcodecs.hpp
+-
+opencv2/highgui/highgui.hpp
+-
+opencv2/imgproc/imgproc.hpp
+-
+iostream
+-
+
 /Users/adrianzgaljic/ColorCalibration/TransformationFinder.cpp
 TransformationFinder.h
 /Users/adrianzgaljic/ColorCalibration/TransformationFinder.h
@@ -14,20 +24,6 @@ TransformationFinder.h
 math.h
 -
 iostream
--
-
-/Users/adrianzgaljic/ColorCalibration/main.cpp
-opencv2/imgcodecs.hpp
--
-opencv2/highgui/highgui.hpp
--
-iostream
--
-TransformationFinder.h
-/Users/adrianzgaljic/ColorCalibration/TransformationFinder.h
-opencv2/imgproc/imgproc.hpp
-/Users/adrianzgaljic/ColorCalibration/opencv2/imgproc/imgproc.hpp
-time.h
 -
 
 /usr/local/Cellar/opencv/4.1.1_2/include/opencv4/opencv2/calib3d.hpp

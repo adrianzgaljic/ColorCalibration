@@ -82,13 +82,13 @@
 				</MakeCommands>
 			</Target>
 		</Build>
+		<Unit filename="/Users/adrianzgaljic/ColorCalibration/StripTest.cpp">
+			<Option target="opencv"/>
+		</Unit>
 		<Unit filename="/Users/adrianzgaljic/ColorCalibration/TransformationFinder.cpp">
 			<Option target="opencv"/>
 		</Unit>
 		<Unit filename="/Users/adrianzgaljic/ColorCalibration/TransformationFinder.h">
-			<Option target="opencv"/>
-		</Unit>
-		<Unit filename="/Users/adrianzgaljic/ColorCalibration/main.cpp">
 			<Option target="opencv"/>
 		</Unit>
 		<Unit filename="/Users/adrianzgaljic/ColorCalibration/CMakeLists.txt">
