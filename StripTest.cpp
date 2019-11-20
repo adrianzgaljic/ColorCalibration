@@ -11,11 +11,13 @@
 using namespace cv;
 using namespace std;
 
+int scalingFactor = 4;
+
 vector<Point2f> getMarkerCenters(Mat imgGray){
     vector<Point2f> result;
     GaussianBlur(imgGray, imgGray, Size(9, 9), 2, 2 );
     vector<Vec3f> circles;
-    HoughCircles(imgGray, circles, HOUGH_GRADIENT, 1, 200, 40, 30, 40, 70);
+    HoughCircles(imgGray, circles, HOUGH_GRADIENT, 1, 200/scalingFactor, 40, 30, 40/scalingFactor, 70/scalingFactor);
 
     Point2f topLeft, topRight, bottomLeft, bottomRight;
     vector<float> xPoints;
@@ -28,7 +30,7 @@ vector<Point2f> getMarkerCenters(Mat imgGray){
         int radius = cvRound(circles[i][2]);
         circle( imgGray, center, radius, Scalar(255), 3, 8, 0 );
     }
-    //imshow("circle", imgGray);
+    imshow("circle", imgGray);
 
     if (circles.size() == 4) {
         for (int i = 0; i < circles.size(); i++) {
@@ -79,8 +81,10 @@ Mat getStripImage(Mat imgTransformed){
 
     Mat edges;
     Canny(imgGrayTransformed, edges, 50, 50, 3);
+    imshow("edges", edges);
     vector<Vec2f> lines;
-    HoughLines(edges, lines, 1, CV_PI/180, 220, 0, 0 );
+    //shoud find better formula for defining threshold
+    HoughLines(edges, lines, 1, CV_PI/180, 250-scalingFactor*30, 0, 0 );
     float averageRho1 = 0;
     float averageRho2  = 0;
     int sum1 = 1;
@@ -104,14 +108,14 @@ Mat getStripImage(Mat imgTransformed){
         if (averageRho1 == 0){
             averageRho1 = abs(rho);
         } else if (averageRho2 == 0){
-            if (abs(averageRho1/sum1-abs(rho)) < 30){
+            if (abs(averageRho1/sum1-abs(rho)) < 30/scalingFactor){
                 averageRho1 += abs(rho);
                 sum1++;
             } else {
                 averageRho2 += abs(rho);
             }
         }
-        if (abs(averageRho1/sum1-abs(rho)) < 30){
+        if (abs(averageRho1/sum1-abs(rho)) < 30/scalingFactor){
             averageRho1 += abs(rho);
             sum1++;
         } else {
@@ -121,13 +125,13 @@ Mat getStripImage(Mat imgTransformed){
     }
     float rho1 = averageRho1/sum1;
     float rho2 = averageRho2/sum2;
-    /*
+
     cout << "rho1:" << rho1 << endl;
     cout << "rho2:" << rho2 << endl;
 
     line(imgTransformed, Point2f(rho1, 0), Point2f(rho1, imgTransformed.rows), Scalar(255,0,0),1);
     line(imgTransformed, Point2f(rho2, 0), Point2f(rho2, imgTransformed.rows), Scalar(255,0,0),1);
-     */
+    imshow("lines", imgTransformed);
     Mat result;
     if (rho1 < rho2){
         Rect newROI(rho1, 0, rho2-rho1,imgGrayTransformed.rows);
@@ -167,21 +171,22 @@ vector<Point3f> getColorSquares(Mat img){
     float ratio = 50.0/63;
     float squareHeight = ratio * partHeight;
     float spaceHeight = partHeight - squareHeight;
-    int squareOffset = 20;
+    int squareOffset = 20/scalingFactor;
     for (int i=0; i<12; i++){
 
         Mat imgSquare = img(Rect(squareOffset, i*partHeight+squareOffset, img.cols-squareOffset, squareHeight-squareOffset));
         result.push_back(getAverageValues(imgSquare));
-        rectangle(img, Point2f(squareOffset, i*partHeight+squareOffset), Point2f(img.cols-squareOffset, i*partHeight+squareHeight-squareOffset), cv::Scalar(0, 0, 255), 3);
+        rectangle(img, Point2f(squareOffset, i*partHeight+squareOffset), Point2f(img.cols-squareOffset, i*partHeight+squareHeight-squareOffset), cv::Scalar(0, 0, 255), 2);
     }
+    imshow("detected squares", img);
     return result;
 }
 
 Mat perspectiveTransformImage(Mat img, Point2f topLeft, Point2f topRight, Point2f bottomLeft, Point2f bottomRight){
-    topLeft.y = topLeft.y - 110;
-    topRight.y = topRight.y - 110;
-    bottomLeft.y = bottomLeft.y + 20;
-    bottomRight.y = bottomRight.y + 20;
+    topLeft.y = topLeft.y - 110/scalingFactor;
+    topRight.y = topRight.y - 110/scalingFactor;
+    bottomLeft.y = bottomLeft.y + 20/scalingFactor;
+    bottomRight.y = bottomRight.y + 20/scalingFactor;
     int width = topRight.x - topLeft.x;
     int height = bottomLeft.y - topLeft.y;
 
@@ -206,8 +211,9 @@ Mat perspectiveTransformImage(Mat img, Point2f topLeft, Point2f topRight, Point2
 
 
 int main(){
-    Mat img = imread("/Users/adrianzgaljic/Desktop/moneo/test_1.jpg", 1);
-
+    Mat imgOriginal = imread("/Users/adrianzgaljic/Desktop/moneo/test_1.jpg", 1);
+    Mat img;
+    resize(imgOriginal, img, cv::Size(), 1.0/scalingFactor, 1.0/scalingFactor);
     clock_t begin = clock();
 
     Mat imgGray;
@@ -224,10 +230,10 @@ int main(){
         Mat imgStrip = getStripImage(imgTransformed);
         imshow("perspective", imgTransformed);
         vector<Point3f> colorValues = getColorSquares(imgStrip);
-        rectangle(img, Point2f(0, 0), Point2f(400, 2500), cv::Scalar(0, 0, 0), -1);
+        rectangle(imgOriginal, Point2f(0, 0), Point2f(400, 2500), cv::Scalar(0, 0, 0), -1);
 
         for (int i=0; i<colorValues.size(); i++){
-            circle(img, Point(200,200*(i+1)),1, Scalar(colorValues.at(i).x, colorValues.at(i).y, colorValues.at(i).z),100);
+            circle(imgOriginal, Point(200,200*(i+1)),1, Scalar(colorValues.at(i).x, colorValues.at(i).y, colorValues.at(i).z),100);
 
         }
 
@@ -239,7 +245,7 @@ int main(){
     clock_t end = clock();
     double elapsed_secs = double(end - begin) / CLOCKS_PER_SEC;
     cout << "time: " << elapsed_secs << endl;
-    imshow("original img", img);
+    imshow("original img", imgOriginal);
 
     waitKey(0);
 
